@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 interface UserStatusData {
   _id: string;
@@ -41,7 +42,7 @@ const UserStatus: React.FC = () => {
         ? trimmedUsername.substring(1) 
         : trimmedUsername;
       
-      const response = await axios.get(`http://localhost:5000/api/transactions/user/${cleanUsername}`);
+      const response = await axios.get(`${API_URL}/transactions/user/${cleanUsername}`);
       setUserData(response.data.data);
     } catch (error: any) {
       if (error.response?.status === 404) {

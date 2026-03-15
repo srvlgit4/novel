@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { hasQRCode } from '../utils/qrMapping';
+import { API_URL } from '../config/api';
 
 interface Transaction {
   _id: string;
@@ -89,11 +90,11 @@ const AdminDashboardEnhanced: React.FC = () => {
       };
       
       // Fetch transactions
-      const transactionsResponse = await axios.get('http://localhost:5000/api/admin/transactions', config);
+      const transactionsResponse = await axios.get(`${API_URL}/admin/transactions`, config);
       setTransactions(transactionsResponse.data.data || []);
       
       // Fetch novels
-      const novelsResponse = await axios.get('http://localhost:5000/api/admin/novels', config);
+      const novelsResponse = await axios.get(`${API_URL}/admin/novels`, config);
       setNovels(novelsResponse.data.data || []);
       
     } catch (error: any) {
@@ -116,14 +117,14 @@ const AdminDashboardEnhanced: React.FC = () => {
     
     try {
       const token = localStorage.getItem('adminToken');
-      await axios.delete(`http://localhost:5000/api/admin/transactions/${id}`, {
+      await axios.delete(`${API_URL}/admin/transactions/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
       
       // Refresh transactions list with token
-      const transactionsResponse = await axios.get('http://localhost:5000/api/admin/transactions', {
+      const transactionsResponse = await axios.get(`${API_URL}/admin/transactions`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -147,14 +148,14 @@ const AdminDashboardEnhanced: React.FC = () => {
     try {
       setDeletingNovel(id);
       const token = localStorage.getItem('adminToken');
-      await axios.delete(`http://localhost:5000/api/novels/${id}`, {
+      await axios.delete(`${API_URL}/novels/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
       
       // Refresh novels list with token
-      const novelsResponse = await axios.get('http://localhost:5000/api/admin/novels', {
+      const novelsResponse = await axios.get(`${API_URL}/admin/novels`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -206,10 +207,10 @@ const AdminDashboardEnhanced: React.FC = () => {
         }
       };
 
-      await axios.put(`http://localhost:5000/api/novels/${editingNovel._id}`, updatedNovel, config);
+      await axios.put(`${API_URL}/novels/${editingNovel._id}`, updatedNovel, config);
       
       // Refresh novels list with token
-      const novelsResponse = await axios.get('http://localhost:5000/api/admin/novels', {
+      const novelsResponse = await axios.get(`${API_URL}/admin/novels`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PaymentModal from './PaymentModal';
+import { API_URL } from '../config/api';
 
 interface Novel {
   _id: string;
@@ -24,7 +25,7 @@ const NovelDetail: React.FC = () => {
   useEffect(() => {
     const fetchNovel = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/novels/${id}`);
+        const response = await axios.get(`${API_URL}/novels/${id}`);
         setNovel(response.data.data);
       } catch (error: any) {
         console.error('Error fetching novel:', error);

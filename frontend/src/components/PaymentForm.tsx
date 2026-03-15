@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 interface Novel {
   _id: string;
@@ -36,7 +37,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ novel, onClose, onSuccess }) 
       formData.append('amount', novel.price.toString());
       formData.append('screenshot', screenshot);
 
-      const response = await axios.post('http://localhost:5000/api/transactions', formData, {
+      const response = await axios.post(`${API_URL}/transactions`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

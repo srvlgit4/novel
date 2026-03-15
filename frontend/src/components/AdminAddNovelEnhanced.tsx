@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getQRCodeUrl, hasQRCode, getDefaultQRCode, getPriceOptions } from '../utils/qrMapping';
+import { API_URL } from '../config/api';
 
 interface Novel {
   _id?: string;
@@ -85,11 +86,11 @@ const AdminAddNovelEnhanced: React.FC = () => {
 
       if (novel._id) {
         // Update existing novel
-        await axios.put(`http://localhost:5000/api/novels/${novel._id}`, novelData, config);
+        await axios.put(`${API_URL}/novels/${novel._id}`, novelData, config);
         setMessage('Novel updated successfully!');
       } else {
         // Add new novel
-        await axios.post('http://localhost:5000/api/novels', novelData, config);
+        await axios.post(`${API_URL}/novels`, novelData, config);
         setMessage('Novel added successfully!');
       }
 

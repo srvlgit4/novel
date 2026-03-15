@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getQRCodeUrl, hasQRCode, getDefaultQRCode } from '../utils/qrMapping';
+import { API_URL } from '../config/api';
 
 interface Plan {
   name: string;
@@ -91,7 +92,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, item, type
       formData.append('planName', type === 'novel' ? (item as Novel).title : (item as Plan).name);
       formData.append('screenshot', screenshot);
 
-      const response = await axios.post('http://localhost:5000/api/transactions', formData, {
+      const response = await axios.post(`${API_URL}/transactions`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

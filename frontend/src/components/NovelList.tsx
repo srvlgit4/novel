@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 interface Novel {
   _id: string;
@@ -33,7 +34,7 @@ const NovelList: React.FC<NovelListProps> = ({ onBuyNovel, selectedCategory = 'A
 
   const fetchNovels = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/novels');
+      const response = await axios.get(`${API_URL}/novels`);
       setNovels(response.data.data);
     } catch (error) {
       console.error('Error fetching novels:', error);
