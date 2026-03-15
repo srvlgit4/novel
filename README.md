@@ -1,6 +1,6 @@
 # Web Novel Membership Site - MERN Stack MVP
 
-A fully functional MERN stack web novel membership platform with admin dashboard, JWT authentication, and manual payment verification.
+A functional MERN stack web novel membership platform with manual payment verification.
 
 ## 🚀 Quick Start
 
@@ -61,16 +61,14 @@ npm start
 ```
 web-novel-mvp/
 ├── backend/
-│   ├── models/          # MongoDB models (Novel, Transaction)
-│   ├── routes/          # API routes with JWT middleware
-│   ├── utils/           # QR code mapping utilities
+│   ├── models/          # MongoDB models
+│   ├── routes/          # API routes
 │   ├── server.js        # Express server
 │   ├── seed.js          # Database seeder
 │   └── .env             # Environment variables
 ├── frontend/
 │   ├── src/
-│   │   ├── components/  # React components (Admin, User, UI)
-│   │   ├── utils/       # Frontend utilities
+│   │   ├── components/  # React components
 │   │   ├── App.tsx      # Main app component
 │   │   └── index.css    # Tailwind CSS
 │   └── tailwind.config.js
@@ -80,75 +78,53 @@ web-novel-mvp/
 ## ✨ Features
 
 ### Frontend
-- **🎨 Modern UI** - Glass-morphism design with dark theme
-- **📱 Responsive Design** - Mobile-first approach with Tailwind CSS
-- **📚 Novel Management** - Browse, filter, and purchase novels
-- **💳 Payment System** - QR code integration with manual verification
-- **👤 User Experience** - Success states and Telegram integration
-- **🔐 Admin Dashboard** - Secure admin panel with JWT authentication
-- **📊 Analytics** - Revenue tracking and user statistics
-- **🔍 Search & Filter** - Real-time transaction and novel filtering
+- **Dark Theme UI** - Deep slate/black background with emerald/blue accents
+- **Novel List Page** - Responsive grid of novels with images and buy buttons
+- **Manual Payment Flow** - QR code display, form submission, and file upload
+- **Success State** - Telegram group link display after payment
+- **Admin Dashboard** - Transaction management and statistics
 
 ### Backend
-- **🔒 Security** - JWT authentication and route protection
-- **📡 RESTful API** - Well-structured endpoints for all operations
-- **💾 MongoDB** - Mongoose models with proper validation
-- **☁️ Cloudinary** - Payment screenshot storage
-- **🤖 Telegram Bot** - Automated notifications and group management
-- **⏰ Membership System** - Automatic expiry date calculation
-- **📈 Admin Operations** - Full CRUD operations for novels and transactions
-
-### Novel Categories
-- Fantasy
-- System Apocalypse
-- Dark Fantasy
-- Cultivation
-- Reincarnation
-- Romance
-- Action
-- Adult
+- **Express API** - RESTful endpoints for novels, transactions, and admin
+- **MongoDB Integration** - Mongoose models for data persistence
+- **Cloudinary Storage** - Payment screenshot uploads
+- **Telegram Notifications** - Bot API integration for admin alerts
+- **30-day Membership** - Automatic expiry date calculation
 
 ## 🛠 Tech Stack
 
 - **Frontend**: React, TypeScript, Tailwind CSS, Axios
-- **Backend**: Node.js, Express, Mongoose, JWT
+- **Backend**: Node.js, Express, Mongoose, Multer
 - **Database**: MongoDB
 - **Storage**: Cloudinary
 - **Notifications**: Telegram Bot API
-- **Authentication**: JWT tokens
-- **Deployment**: Vercel (Frontend), Render (Backend)
 
 ## 📱 Usage
 
 ### User Flow
-1. Browse novels by category on the main page
-2. Click "Buy Access" on any novel or purchase membership
-3. Scan QR code and complete payment
-4. Upload payment screenshot with Telegram username
-5. Receive confirmation and Telegram group invite
-6. Enjoy premium access to novels
+1. Browse novels on the main page
+2. Click "Buy Access" on any novel
+3. Scan GPay QR code and pay
+4. Upload payment screenshot and enter Telegram username
+5. Receive confirmation and Telegram group link
 
 ### Admin Flow
-1. Login at `/admin-login` with password: `admin123`
-2. View dashboard with statistics and analytics
-3. Manage novels (Add, Edit, Delete)
-4. Monitor transactions and user activity
-5. Review payment screenshots
-6. Delete transactions and manage users
+1. Visit `/admin` to view dashboard
+2. Monitor transactions and user activity
+3. View payment screenshots
+4. Manage novel inventory
 
 ## 🔧 API Endpoints
 
 ### Novels
 - `GET /api/novels` - Get all active novels
-- `POST /api/novels` - Create new novel (admin, JWT protected)
-- `PUT /api/novels/:id` - Update novel (admin, JWT protected)
-- `DELETE /api/novels/:id` - Delete novel (admin, JWT protected)
+- `POST /api/novels` - Create new novel (admin)
 
 ### Transactions
 - `POST /api/transactions` - Create new transaction
 - `GET /api/transactions/:id` - Get transaction by ID
 
-### Admin (JWT Protected)
+### Admin
 - `GET /api/admin/transactions` - Get all transactions
 - `GET /api/admin/novels` - Get all novels
 - `GET /api/admin/dashboard` - Get dashboard stats
@@ -156,82 +132,16 @@ web-novel-mvp/
 
 ## 🚀 Deployment
 
-### Backend (Render)
-1. **Create Render Account**: Sign up at [render.com](https://render.com)
-2. **Fork Repository**: Fork this repo to your GitHub account
-3. **Connect to Render**: Link your GitHub repository
-4. **Configure Environment Variables**:
-   ```
-   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/web-novel-mvp
-   CLOUDINARY_URL=cloudinary://your_api_key:your_api_secret@your_cloud_name
-   TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-   ADMIN_CHAT_ID=your_admin_chat_id
-   GROUP_INVITE_LINK=https://t.me/your_group_invite_link
-   PORT=5000
-   ```
-5. **Deploy**: Click "Deploy Web Service"
-6. **Get URL**: Copy your backend URL for frontend configuration
+### Backend (Render/Heroku)
+1. Deploy backend to your preferred platform
+2. Set environment variables in deployment dashboard
+3. Ensure MongoDB is accessible (Atlas recommended)
 
-### Frontend (Vercel)
-1. **Create Vercel Account**: Sign up at [vercel.com](https://vercel.com)
-2. **Import Project**: Connect your GitHub repository
-3. **Configure Build Settings**:
-   - **Build Command**: `cd frontend && npm run build`
-   - **Output Directory**: `frontend/build`
-   - **Install Command**: `cd frontend && npm install`
-4. **Environment Variables**:
-   ```
-   REACT_APP_API_URL=https://your-backend-url.onrender.com
-   ```
-5. **Deploy**: Click "Deploy"
-
-### Important Deployment Notes
-- **MongoDB Atlas**: Use MongoDB Atlas for production database
-- **Environment Variables**: Never commit `.env` files to Git
-- **CORS**: Update CORS settings in `backend/server.js` for production URL
-- **Build Process**: Frontend builds to static files for optimal performance
-
-## 🔐 Security Features
-
-- **JWT Authentication**: Secure admin panel access
-- **Route Protection**: All admin APIs require valid tokens
-- **Input Validation**: Mongoose schema validation
-- **CORS Configuration**: Proper cross-origin resource sharing
-- **Environment Variables**: Sensitive data in environment files
-- **Password Protection**: Admin login with secure password
-
-## 📊 Admin Dashboard Features
-
-- **📈 Statistics**: Total revenue, novels, and active users
-- **📚 Novel Management**: Add, edit, and delete novels
-- **💰 Transaction Management**: View and manage user transactions
-- **🔍 Search**: Real-time search by Telegram username
-- **📱 Responsive**: Works perfectly on mobile and desktop
-- **🎨 Modern UI**: Glass-morphism design with smooth animations
-
-## 🌟 Live Demo
-
-- **Frontend**: [Your Vercel URL]
-- **Backend API**: [Your Render URL]
-- **Admin Panel**: [Your Vercel URL]/admin
+### Frontend (Vercel/Netlify)
+1. Build frontend: `npm run build`
+2. Deploy static files to your preferred platform
+3. Update API base URL in components for production
 
 ## 📄 License
 
-MIT License - feel free to use this project for your own web novel platform!
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📞 Support
-
-For support or questions:
-- Create an issue in this repository
-- Contact the development team
-
----
-
-**⚡ Ready to deploy your own web novel membership platform!**
+MIT

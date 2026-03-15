@@ -164,7 +164,6 @@ const AdminAddNovelEnhanced: React.FC = () => {
                   <option value="Reincarnation">Reincarnation</option>
                   <option value="Romance">Romance</option>
                   <option value="Action">Action</option>
-                  <option value="Adult">Adult</option>
                 </select>
               </div>
 

@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
   const [paymentType, setPaymentType] = useState<'novel' | 'membership'>('novel');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Fantasy', 'System Apocalypse', 'Dark Fantasy', 'Cultivation', 'Reincarnation', 'Romance', 'Action', 'Adult'];
+  const categories = ['All', 'Fantasy', 'System Apocalypse', 'Dark Fantasy', 'Cultivation', 'Reincarnation', 'Romance', 'Action'];
 
   // Listen for custom events
   useEffect(() => {

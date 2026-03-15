@@ -21,7 +21,7 @@ const novelSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['Fantasy', 'System Apocalypse', 'Dark Fantasy', 'Cultivation', 'Reincarnation', 'Romance', 'Action', 'Adult']
+    enum: ['Fantasy', 'System Apocalypse', 'Dark Fantasy', 'Cultivation', 'Reincarnation', 'Romance', 'Action']
   },
   price: {
     type: Number,

@@ -104,6 +104,3 @@ backend/uploads/
 # Backup files
 *.backup
 *.bak
-
-# Lock files (keep package-lock.json but ignore yarn.lock if using npm)
-# yarn.lock
