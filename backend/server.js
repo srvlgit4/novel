@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
 require('dotenv').config();
 
 // Import routes
@@ -37,18 +36,13 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminAddNovelRoutes);
 
 // Health check
+app.get('/', (req, res) => {
+  res.send("NovelTap API is running...");
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Web Novel MVP API is running' });
 });
-
-// Serve static files from frontend in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-  });
-}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
