@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "setup": "node setup-env.js && npm install",
+    "quick-start": "node quick-start.js",
+    "quick-reset": "node quick-reset.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "seed": "node quick-start.js",
+    "reset": "node quick-reset.js",
+    "deploy-setup": "npm run build && npm run setup"
+  }
+}
